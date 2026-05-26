@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ store.name }} - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="detail-view" style="margin-top: 2rem; display: block;">
+    <h1 style="margin-bottom: 1.5rem;">{{ store.name }}</h1>
+    
+    <div style="background: rgba(255,255,255,0.05); padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Адрес:</strong> {{ store.address }}</p>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Телефон:</strong> {{ store.phone|default:"Не указан" }}</p>
+        <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Часы работы:</strong> {{ store.working_hours|default:"Не указаны" }}</p>
+    </div>
+    
+    <h2>Сотрудники этого магазина:</h2>
+    <ul>
+        {% for employee in store.employees.all %}
+            <li><a href="{% url 'employee_detail' employee.pk %}" style="color: var(--accent-color);">{{ employee.first_name }} {{ employee.last_name }} ({{ employee.position }})</a></li>
+        {% empty %}
+            <li>Сотрудники не привязаны.</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'store_list' %}" class="btn" style="margin-top: 2rem;">Назад к списку магазинов</a>
+</div>
+{% endblock %}

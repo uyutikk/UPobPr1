@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Бренды - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="hero" style="padding: 2rem 0;">
+    <h1>Бренды</h1>
+</div>
+
+<div class="grid">
+    {% for brand in brands %}
+    <div class="card">
+        {% if brand.image %}
+        <div class="card-img-wrapper">
+            <img src="{{ brand.image.url }}" alt="{{ brand.name }}" class="card-img">
+        </div>
+        {% else %}
+        <div class="card-img-wrapper" style="display:flex; justify-content:center; align-items:center; background:#334155;">
+            <span style="color:#94a3b8;">Нет логотипа</span>
+        </div>
+        {% endif %}
+        <div class="card-content">
+            <a href="{% url 'brand_detail' brand.pk %}" class="card-title">{{ brand.name }}</a>
+            <p class="card-text">{{ brand.description|truncatewords:15 }}</p>
+            <a href="{% url 'brand_detail' brand.pk %}" class="btn">О бренде</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Бренды не найдены.</p>
+    {% endfor %}
+</div>
+{% endblock %}

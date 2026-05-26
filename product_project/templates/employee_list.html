@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Сотрудники - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="hero" style="padding: 2rem 0;">
+    <h1>Наша команда</h1>
+</div>
+
+<div class="grid">
+    {% for employee in employees %}
+    <div class="card" style="align-items: center; justify-content: flex-start; min-height: 150px; padding: 1.5rem;">
+        {% if employee.photo %}
+        <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin-bottom: 1rem; border: 2px solid var(--accent-color);">
+            <img src="{{ employee.photo.url }}" alt="{{ employee.first_name }}" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        {% else %}
+        <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin-bottom: 1rem; border: 2px solid var(--accent-color); background: #e5e5e5; display: flex; align-items: center; justify-content: center;">
+            <span style="font-size: 2rem; color: #555555;">👤</span>
+        </div>
+        {% endif %}
+        <div class="card-content" style="text-align: center; padding: 0;">
+            <a href="{% url 'employee_detail' employee.pk %}" class="card-title" style="font-size: 1.5rem; margin-bottom: 0.5rem; display:block;">{{ employee.first_name }} {{ employee.last_name }}</a>
+            <p style="color: var(--accent-hover); font-weight: bold; margin-bottom: 1rem;">{{ employee.position }}</p>
+            {% if employee.store %}
+                <p style="color: #94a3b8; font-size: 0.9rem;">Магазин: {{ employee.store.name }}</p>
+            {% endif %}
+        </div>
+    </div>
+    {% empty %}
+    <p>Сотрудники не найдены.</p>
+    {% endfor %}
+</div>
+{% endblock %}

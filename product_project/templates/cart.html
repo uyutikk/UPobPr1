@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Корзина - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="hero" style="padding: 2rem 0;">
+    <h1>Корзина</h1>
+    <p>Ваши выбранные товары для бронирования</p>
+</div>
+
+<div class="detail-view">
+    <div class="detail-info" style="width: 100%;">
+        <p style="text-align: center; color: #94a3b8; padding: 2rem;">Ваша корзина пока пуста. <a href="{% url 'category_list' %}" style="color: var(--accent-color);">Перейти к покупкам</a></p>
+    </div>
+</div>
+{% endblock %}

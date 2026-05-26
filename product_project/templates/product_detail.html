@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="detail-view" style="margin-top: 2rem;">
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="detail-img">
+    {% else %}
+    <div class="detail-img" style="display:flex; justify-content:center; align-items:center; background:#e5e5e5; width:400px; height:400px;">
+        <span style="color:#555555;">Нет фото</span>
+    </div>
+    {% endif %}
+    
+    <div class="detail-info">
+        <h1 style="margin-bottom: 0.5rem;">{{ product.name }}</h1>
+        <p style="color: var(--accent-color); font-weight: bold; margin-bottom: 0.5rem;">Категория: {{ product.category.name }}</p>
+        {% if product.brand %}
+        <p style="color: #555555; margin-bottom: 2rem;">Бренд: <a href="{% url 'brand_detail' product.brand.pk %}" style="color: var(--accent-color); font-weight: bold;">{{ product.brand.name }}</a></p>
+        {% else %}
+        <div style="margin-bottom: 2rem;"></div>
+        {% endif %}
+        
+        <p style="font-size: 2rem; font-weight: 800; margin-bottom: 1rem;">{{ product.price }} ₽</p>
+        
+        <div style="background: rgba(0,0,0,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 2rem;">
+            <p><strong>Остаток:</strong> {{ product.stock }} шт.</p>
+            <p><strong>Доступность:</strong> {% if product.is_available %}В наличии{% else %}Нет в наличии{% endif %}</p>
+        </div>
+        
+        <h3>Описание:</h3>
+        <p style="line-height: 1.6; color: #555555;">{{ product.description|default:"Описание отсутствует" }}</p>
+        
+        <button class="btn" style="margin-top: 2rem; width: 100%;">Забронировать</button>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h1>Добро пожаловать в АЛКОСМО</h1>
+    <p>Элитный алкоголь со всего мира. Забронируйте любимые напитки онлайн и заберите в удобном для вас магазине.</p>
+    <a href="{% url 'category_list' %}" class="btn">Перейти в каталог</a>
+</div>
+
+<div class="grid">
+    <div class="card">
+        <div class="card-content" style="text-align: center;">
+            <h3 class="card-title">Широкий ассортимент</h3>
+            <p class="card-text">Сотни наименований вин, крепкого алкоголя и крафтового пива.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-content" style="text-align: center;">
+            <h3 class="card-title">Удобное бронирование</h3>
+            <p class="card-text">Выбирайте на сайте, забирайте и оплачивайте в магазине.</p>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-content" style="text-align: center;">
+            <h3 class="card-title">Гарантия качества</h3>
+            <p class="card-text">Работаем только с проверенными поставщиками и брендами.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

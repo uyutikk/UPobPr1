@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ category.name }} - АЛКОСМО{% endblock %}
+
+{% block content %}
+<div class="breadcrumbs">
+    <a href="{% url 'category_list' %}">Каталог</a>
+    {% for bc in category.get_breadcrumbs %}
+        &rsaquo; <a href="{% url 'category_detail' bc.slug %}">{{ bc.name }}</a>
+    {% endfor %}
+</div>
+
+<div class="hero" style="padding: 1rem 0;">
+    <h1 style="color: var(--accent-color);">{{ category.name }}</h1>
+</div>
+
+{% if subcategories %}
+<h2>Подкатегории</h2>
+<div class="grid" style="margin-bottom: 3rem;">
+    {% for subcat in subcategories %}
+    <div class="card" style="align-items: center; justify-content: center; min-height: 100px; background: {% if subcat.image %}linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ subcat.image.url }}') center/cover{% else %}#000{% endif %}; border: 1px solid var(--accent-color);">
+        <div class="card-content" style="text-align: center; padding: 1rem;">
+            <a href="{% url 'category_detail' subcat.slug %}" class="card-title" style="color: #fff; font-size: 1.2rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">{{ subcat.name }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+<h2>Товары в этой категории</h2>
+<div class="grid">
+    {% for product in products %}
+    <div class="card">
+        {% if product.image %}
+        <div class="card-img-wrapper">
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="card-img">
+        </div>
+        {% else %}
+        <div class="card-img-wrapper" style="display:flex; justify-content:center; align-items:center; background:#e5e5e5;">
+            <span style="color:#555555;">Нет фото</span>
+        </div>
+        {% endif %}
+        <div class="card-content">
+            <a href="{% url 'product_detail' product.slug %}" class="card-title">{{ product.name }}</a>
+            <p style="font-weight: bold; font-size: 1.2rem; color: var(--accent-color); margin-bottom: 1rem;">{{ product.price }} ₽</p>
+            <a href="{% url 'product_detail' product.slug %}" class="btn" style="width: 100%; box-sizing: border-box;">Подробнее</a>
+        </div>
+    </div>
+    {% empty %}
+    <p>Товаров пока нет.</p>
+    {% endfor %}
+</div>
+{% endblock %}
