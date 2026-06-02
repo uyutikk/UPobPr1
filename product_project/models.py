@@ -1,4 +1,6 @@
+# pyrefly: ignore [missing-import]
 from django.db import models
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название категории")
@@ -22,6 +24,9 @@ class Category(models.Model):
         if self.parent:
             return f"{self.parent.name} -> {self.name}"
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'category_slug': self.slug})
 
     def get_breadcrumbs(self):
         """Собирает цепочку категорий для хлебных крошек."""
@@ -85,6 +90,9 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'product_slug': self.slug})
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=100, verbose_name="Название бренда")
@@ -97,6 +105,9 @@ class Brand(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('brand_detail', kwargs={'pk': self.pk})
 
 
 class Store(models.Model):
@@ -111,6 +122,9 @@ class Store(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('store_detail', kwargs={'pk': self.pk})
 
 
 class Employee(models.Model):
@@ -127,6 +141,9 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name} ({self.position})"
 
+    def get_absolute_url(self):
+        return reverse('employee_detail', kwargs={'pk': self.pk})
+
 
 class Supplier(models.Model):
     name = models.CharField(max_length=150, verbose_name="Наименование поставщика")
@@ -140,6 +157,9 @@ class Supplier(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('supplier_detail', kwargs={'pk': self.pk})
 
 
 class Review(models.Model):

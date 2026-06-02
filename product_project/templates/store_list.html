@@ -3,8 +3,9 @@
 {% block title %}Магазины - АЛКОСМО{% endblock %}
 
 {% block content %}
-<div class="hero" style="padding: 2rem 0;">
+<div class="page-header">
     <h1>Наши магазины</h1>
+    <a href="{% url 'store_create' %}" class="btn btn-success">+ Добавить магазин</a>
 </div>
 
 <div class="grid">
@@ -17,6 +18,10 @@
             {% if store.working_hours %}<p style="color: #555555; margin-bottom: 1.5rem;">🕒 {{ store.working_hours }}</p>{% endif %}
             
             <a href="{% url 'store_detail' store.pk %}" class="btn" style="margin-top: auto;">Подробнее</a>
+            <div class="card-actions">
+                <a href="{% url 'store_update' store.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'store_delete' store.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% empty %}

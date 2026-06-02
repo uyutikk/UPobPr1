@@ -10,8 +10,9 @@
     {% endfor %}
 </div>
 
-<div class="hero" style="padding: 1rem 0;">
+<div class="page-header">
     <h1 style="color: var(--accent-color);">{{ category.name }}</h1>
+    <a href="{% url 'product_create' %}?category={{ category.pk }}" class="btn btn-success">+ Добавить товар</a>
 </div>
 
 {% if subcategories %}
@@ -19,8 +20,12 @@
 <div class="grid" style="margin-bottom: 3rem;">
     {% for subcat in subcategories %}
     <div class="card" style="align-items: center; justify-content: center; min-height: 100px; background: {% if subcat.image %}linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ subcat.image.url }}') center/cover{% else %}#000{% endif %}; border: 1px solid var(--accent-color);">
-        <div class="card-content" style="text-align: center; padding: 1rem;">
+        <div class="card-content" style="text-align: center; padding: 1rem; width: 100%;">
             <a href="{% url 'category_detail' subcat.slug %}" class="card-title" style="color: #fff; font-size: 1.2rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.8);">{{ subcat.name }}</a>
+            <div class="card-actions" style="justify-content: center; margin-top: 10px;">
+                <a href="{% url 'category_update' subcat.slug %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'category_delete' subcat.slug %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% endfor %}
@@ -44,6 +49,10 @@
             <a href="{% url 'product_detail' product.slug %}" class="card-title">{{ product.name }}</a>
             <p style="font-weight: bold; font-size: 1.2rem; color: var(--accent-color); margin-bottom: 1rem;">{{ product.price }} ₽</p>
             <a href="{% url 'product_detail' product.slug %}" class="btn" style="width: 100%; box-sizing: border-box;">Подробнее</a>
+            <div class="card-actions">
+                <a href="{% url 'product_update' product.slug %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'product_delete' product.slug %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% empty %}

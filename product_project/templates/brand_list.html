@@ -3,8 +3,9 @@
 {% block title %}Бренды - АЛКОСМО{% endblock %}
 
 {% block content %}
-<div class="hero" style="padding: 2rem 0;">
+<div class="page-header">
     <h1>Бренды</h1>
+    <a href="{% url 'brand_create' %}" class="btn btn-success">+ Добавить бренд</a>
 </div>
 
 <div class="grid">
@@ -23,6 +24,10 @@
             <a href="{% url 'brand_detail' brand.pk %}" class="card-title">{{ brand.name }}</a>
             <p class="card-text">{{ brand.description|truncatewords:15 }}</p>
             <a href="{% url 'brand_detail' brand.pk %}" class="btn">О бренде</a>
+            <div class="card-actions">
+                <a href="{% url 'brand_update' brand.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'brand_delete' brand.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% empty %}

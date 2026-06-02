@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,9 @@
         :root {
             --bg-color: #ffffff;
             --text-color: #000000;
-            --accent-color: #e50914; /* Красный */
-            --accent-hover: #b9090b; /* Темно-красный */
-            --card-bg: #f8f9fa; /* Светло-серый */
+            --accent-color: #e50914;
+            --accent-hover: #b9090b;
+            --card-bg: #f8f9fa;
             --border-color: #e5e5e5;
         }
 
@@ -25,9 +26,8 @@
             min-height: 100vh;
         }
 
-        /* Header */
         header {
-            background-color: #000000; /* Черный хедер */
+            background-color: #000000;
             border-bottom: 3px solid var(--accent-color);
             position: sticky;
             top: 0;
@@ -219,18 +219,18 @@
             margin-top: 0;
             font-size: 2.5rem;
         }
-        
+
         .breadcrumbs {
             margin-bottom: 1rem;
             font-size: 0.9rem;
             color: #555555;
         }
-        
+
         .breadcrumbs a {
             color: var(--accent-color);
             text-decoration: none;
         }
-        
+
         .breadcrumbs a:hover {
             text-decoration: underline;
         }
@@ -239,13 +239,166 @@
             .detail-view {
                 flex-direction: column;
             }
+
             .header-content {
                 flex-direction: column;
                 gap: 1rem;
             }
         }
+
+        /* Forms */
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+        }
+
+        .form-container h1 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 1rem;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.15);
+        }
+
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--accent-color);
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .error-msg {
+            color: var(--accent-color);
+            font-size: 0.85rem;
+            margin-top: 0.4rem;
+        }
+
+        /* Button Variants */
+        .btn-success {
+            background-color: #10b981;
+        }
+
+        .btn-success:hover {
+            background-color: #059669;
+        }
+
+        .btn-secondary {
+            background-color: #6b7280;
+        }
+
+        .btn-secondary:hover {
+            background-color: #4b5563;
+        }
+
+        .btn-danger {
+            background-color: #ef4444;
+        }
+
+        .btn-danger:hover {
+            background-color: #dc2626;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* Action buttons on cards */
+        .card-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .card-actions a {
+            flex: 1;
+        }
+
+        /* Delete Confirmation */
+        .delete-confirm {
+            max-width: 500px;
+            margin: 3rem auto;
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2.5rem;
+            text-align: center;
+        }
+
+        .delete-confirm h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ef4444;
+        }
+
+        .delete-confirm p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 2rem;
+        }
+
+        .delete-confirm .form-actions {
+            justify-content: center;
+        }
+
+        /* Page header with action button */
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .page-header h1 {
+            margin: 0;
+        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -273,5 +426,36 @@
         <p>&copy; 2026 АЛКОСМО. Все права защищены. Чрезмерное употребление алкоголя вредит вашему здоровью.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nameInput = document.getElementById('id_name');
+            const slugInput = document.getElementById('id_slug');
+            
+            if (nameInput && slugInput) {
+                const translitMap = {
+                    'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'yo', 'ж': 'zh',
+                    'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o',
+                    'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'u', 'ф': 'f', 'х': 'h', 'ц': 'c',
+                    'ч': 'ch', 'ш': 'sh', 'щ': 'shch', 'ъ': '', 'ы': 'y', 'ь': '', 'э': 'e', 'ю': 'yu',
+                    'я': 'ya', ' ': '-', '_': '-'
+                };
+
+                function transliterate(text) {
+                    return text.toLowerCase().split('').map(char => translitMap[char] || char).join('').replace(/[^a-z0-9-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '');
+                }
+
+                nameInput.addEventListener('input', function() {
+                    // Only auto-fill if user hasn't manually edited the slug
+                    if (!slugInput.dataset.manualModified) {
+                        slugInput.value = transliterate(nameInput.value);
+                    }
+                });
+
+                slugInput.addEventListener('input', function() {
+                    slugInput.dataset.manualModified = 'true';
+                });
+            }
+        });
+    </script>
 </body>
 </html>

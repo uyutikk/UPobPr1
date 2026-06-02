@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Добавить товар - АЛКОСМО{% endblock %}
+{% block title %}Добавить бренд - АЛКОСМО{% endblock %}
 
 {% block content %}
 <div class="form-container">
-    <h1>Добавить товар</h1>
+    <h1>Добавить бренд</h1>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
@@ -18,7 +18,7 @@
         {% endfor %}
         <div class="form-actions">
             <button type="submit" class="btn btn-success">Сохранить</button>
-            <a href="{% url 'category_list' %}" class="btn btn-secondary">Отмена</a>
+            <a href="{% url 'brand_list' %}" class="btn btn-secondary">Отмена</a>
         </div>
     </form>
 </div>

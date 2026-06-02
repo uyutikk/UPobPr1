@@ -22,6 +22,10 @@
         <p style="font-size: 1.2rem; margin-bottom: 1rem;"><strong>Телефон:</strong> {{ supplier.contact_phone|default:"Не указан" }}</p>
     </div>
     
-    <a href="{% url 'supplier_list' %}" class="btn" style="margin-top: 2rem;">Назад к списку поставщиков</a>
+    <div class="form-actions" style="justify-content: center;">
+        <a href="{% url 'supplier_list' %}" class="btn">Назад к списку поставщиков</a>
+        <a href="{% url 'supplier_update' supplier.pk %}" class="btn btn-secondary">Редактировать</a>
+        <a href="{% url 'supplier_delete' supplier.pk %}" class="btn btn-danger">Удалить</a>
+    </div>
 </div>
 {% endblock %}

@@ -3,8 +3,9 @@
 {% block title %}Сотрудники - АЛКОСМО{% endblock %}
 
 {% block content %}
-<div class="hero" style="padding: 2rem 0;">
+<div class="page-header">
     <h1>Наша команда</h1>
+    <a href="{% url 'employee_create' %}" class="btn btn-success">+ Добавить сотрудника</a>
 </div>
 
 <div class="grid">
@@ -25,6 +26,10 @@
             {% if employee.store %}
                 <p style="color: #94a3b8; font-size: 0.9rem;">Магазин: {{ employee.store.name }}</p>
             {% endif %}
+            <div class="card-actions" style="justify-content: center;">
+                <a href="{% url 'employee_update' employee.pk %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'employee_delete' employee.pk %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% empty %}

@@ -3,16 +3,21 @@
 {% block title %}Каталог - АЛКОСМО{% endblock %}
 
 {% block content %}
-<div class="hero" style="padding: 2rem 0;">
+<div class="page-header">
     <h1>Каталог</h1>
-    <p>Выберите интересующую категорию</p>
+    <a href="{% url 'category_create' %}" class="btn btn-success">+ Добавить категорию</a>
 </div>
+<p style="color: #555; margin-bottom: 1rem;">Выберите интересующую категорию</p>
 
 <div class="grid">
     {% for category in categories %}
     <div class="card" style="align-items: center; justify-content: center; min-height: 150px; background: {% if category.image %}linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ category.image.url }}') center/cover{% else %}#000{% endif %}; border: 2px solid var(--accent-color);">
         <div class="card-content" style="text-align: center;">
             <a href="{% url 'category_detail' category.slug %}" class="card-title" style="color: #fff; font-size: 1.5rem; text-transform: uppercase; text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">{{ category.name }}</a>
+            <div class="card-actions" style="justify-content: center;">
+                <a href="{% url 'category_update' category.slug %}" class="btn btn-sm btn-secondary">Редактировать</a>
+                <a href="{% url 'category_delete' category.slug %}" class="btn btn-sm btn-danger">Удалить</a>
+            </div>
         </div>
     </div>
     {% empty %}
